@@ -1,0 +1,76 @@
+
+//INNER JOIN
+
+SELECT 
+    c.CustomerID,
+    c.Name AS CustomerName,
+    o.OrderID,
+    o.OrderDate,
+    o.TotalAmount
+FROM Customers c
+INNER JOIN Orders o 
+    ON c.CustomerID = o.CustomerID;
+
+
+
+//LEFT OUTER JOIN
+SELECT 
+    c.CustomerID,
+    c.Name AS CustomerName,
+    o.OrderID,
+    o.OrderDate,
+    o.TotalAmount
+FROM Customers c
+LEFT JOIN Orders o 
+    ON c.CustomerID = o.CustomerID;
+
+
+
+
+//RIGHT  OUTER JOIN
+SELECT 
+    o.OrderID,
+    o.OrderDate,
+    o.TotalAmount,
+    c.CustomerID,
+    c.Name AS CustomerName
+FROM Customers c
+RIGHT JOIN Orders o 
+    ON c.CustomerID = o.CustomerID;
+
+
+
+//FULL OUTER JOIN
+SELECT 
+    o.OrderID,
+    o.OrderDate,
+    o.TotalAmount,
+    c.CustomerID,
+    c.Name AS CustomerName
+FROM Customers c
+RIGHT JOIN Orders o 
+    ON c.CustomerID = o.CustomerID;
+
+
+Note: MySQL doesn’t directly support FULL JOIN. You can emulate it with UNION:
+
+SELECT 
+    c.CustomerID,
+    c.Name AS CustomerName,
+    o.OrderID,
+    o.OrderDate,
+    o.TotalAmount
+FROM Customers c
+LEFT JOIN Orders o 
+    ON c.CustomerID = o.CustomerID
+UNION
+SELECT 
+    c.CustomerID,
+    c.Name AS CustomerName,
+    o.OrderID,
+    o.OrderDate,
+    o.TotalAmount
+FROM Customers c
+RIGHT JOIN Orders o 
+    ON c.CustomerID = o.CustomerID;
+
